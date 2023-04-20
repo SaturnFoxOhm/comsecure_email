@@ -1,0 +1,14 @@
+{% extends "email_app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+    <h1>Username: {{ user.username }}</h1>
+    <br>
+    <h1>Email: {{ user.email }}</h1>
+    <br>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Want To Change Your Password? <a class="ml-2" href="{% url 'change-password' %}">Reset Password</a>
+        </small>
+    </div>
+{% endblock content %}
