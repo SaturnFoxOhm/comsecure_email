@@ -1,0 +1,44 @@
+{% extends "email_app/base.html" %}
+{% block content %}
+<style>
+    td {
+        cursor: pointer;
+    }
+    .table-row:hover {
+        transition: 0.5s;
+    }
+    .table {
+        border-radius: 10px;
+    }
+</style>
+
+<h1>Sent</h1>
+<br>
+<table class="table table-hover bg-white">
+    <tbody>
+        <tr></tr>
+        {% for mail in mails %}
+        
+        <tr class="table-row" data-href="{% url 'email-detail' mail.id %}">
+            <td>
+                {{ mail.send_to }}
+            </td>
+            <td>
+                {{ mail.subject }}
+            </td>
+            <td>
+                <small class="text-muted">{{ mail.date|date:"f A, N d, Y" }}</small>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".table-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+{% endblock content %}

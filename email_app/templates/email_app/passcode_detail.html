@@ -1,0 +1,88 @@
+{% extends "email_app/base.html" %}
+{% block content %}
+<style>
+    .col-md-12 .line {
+        margin-right : 15px;
+        height: 2px;
+    }
+    .bg-white {
+        padding: 15px;
+        padding-bottom: 40px;
+        padding-left: 25px;
+        border-radius: 10px;
+    }
+    #error {
+        color: red;
+    }
+</style>
+<div class="bg-white">
+    <div class="row text-right" style="padding-right: 15px;">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-4">
+            <small class="text-muted">{{ object.date|date:"f A, N d, Y" }}</small>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-2 font-weight-bold">
+            From:
+        </div>
+        <div class="col-sm-10">
+            {{ object.send_from }}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-2 font-weight-bold">
+            To:
+        </div>
+        <div class="col-sm-10">
+            {{ object.send_to }}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-2 font-weight-bold">
+            Subject:
+        </div>
+        <div class="col-sm-10">
+            {{ object.subject }}
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <hr class = "line" />
+            </div>
+        </div> 
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group row mb-2">
+            <div class="col-sm-2 font-weight-bold" style="margin-top: 7px;">
+                Passcode:
+            </div>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="passcode" placeholder="8-leter Passcode" required>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-outline-info" type="submit" onclick="submit()">Send</button>
+            </div>
+        </div>
+    </form>
+    <div class="row mb-2">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" id="error">{{ object.error }}</div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-2 font-weight-bold">
+            Message:
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {{ object.message }}
+        </div>
+    </div>
+</div>
+{% endblock content %}

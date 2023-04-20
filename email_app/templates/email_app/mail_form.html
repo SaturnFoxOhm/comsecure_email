@@ -1,0 +1,23 @@
+{% extends "email_app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Compose</h1>
+    <br>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-outline-info" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
